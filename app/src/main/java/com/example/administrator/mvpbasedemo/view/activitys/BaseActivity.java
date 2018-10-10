@@ -13,9 +13,9 @@ import com.example.administrator.mvpbasedemo.view.view.LekeProgressDialog;
  * <p>
  * activity 基类
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<V extends BaseViewListener,P extends BasePresenter> extends AppCompatActivity {
 
-    protected T mPresenter;
+    protected P mPresenter;
     private LekeProgressDialog mLekeProgressDialog;
 
 
@@ -25,7 +25,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         mPresenter = createPresenter();
         mLekeProgressDialog = new LekeProgressDialog(this);
         Log.i("TAG","TTT--------------------："+"BaseActivity");
-        mPresenter.attach((BaseViewListener) this);// 这里的this代表继承BaseActivity的上下问，eg:LoginActivity上下问
+        mPresenter.attach(getIView());// 这里的this代表继承BaseActivity的上下问，eg:LoginActivity上下问
     }
 
 
@@ -43,7 +43,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         mLekeProgressDialog = null;
     }
 
-    protected abstract T createPresenter();
+    protected abstract P createPresenter();
 
     @Override
     protected void onDestroy() {
@@ -51,4 +51,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         mPresenter.deAttach();
         dissMissDialog();
     }
+
+    protected abstract V getIView();
 }

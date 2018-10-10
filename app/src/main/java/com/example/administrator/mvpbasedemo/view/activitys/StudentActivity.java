@@ -9,7 +9,7 @@ import com.example.administrator.mvpbasedemo.R;
 import com.example.administrator.mvpbasedemo.presenter.StudentActivtiyPresent;
 import com.example.administrator.mvpbasedemo.view.interfaces.StudentActivityViewListener;
 
-public class StudentActivity extends BaseActivity<StudentActivtiyPresent> implements StudentActivityViewListener {
+public class StudentActivity extends BaseActivity<StudentActivityViewListener,StudentActivtiyPresent> implements StudentActivityViewListener {
 
     private TextView mTv;
     private Button mButton;
@@ -31,6 +31,11 @@ public class StudentActivity extends BaseActivity<StudentActivtiyPresent> implem
     @Override
     protected StudentActivtiyPresent createPresenter() {
         return new StudentActivtiyPresent();
+    }
+
+    @Override
+    protected StudentActivityViewListener getIView() {
+        return this;
     }
 
     @Override

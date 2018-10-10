@@ -12,18 +12,18 @@ import java.lang.ref.WeakReference;
  * <p>
  * present 基类
  */
-public abstract class BasePresenter<T extends BaseViewListener, M extends BaseModelListener> {
+public abstract class BasePresenter<V extends BaseViewListener, M extends BaseModelListener> {
 
-    private WeakReference<T> weakReference;
+    private WeakReference<V> weakReference;
     protected M mModel;
 
     /**
-     * @param t 对的activity上下午对象，具体activtiy（view）实现了不同的接口，进行回调对应接口方法时候用到（接口子类对象类对象调用接口方法），
+     * @param v 对的activity上下午对象，具体activtiy（view）实现了不同的接口，进行回调对应接口方法时候用到（接口子类对象类对象调用接口方法），
      *          activty退出了，某个接口进网络操作，存在对当前上下午引用，存在内存泄漏，使用WeakReference解决。
      */
-    public void attach(T t) {
+    public void attach(V v) {
         Log.i("TAG","TTT--------------------："+"BasePresenter===attach");
-        weakReference = new WeakReference<>(t);
+        weakReference = new WeakReference<>(v);
         mModel = getModel();
     }
 
@@ -48,7 +48,7 @@ public abstract class BasePresenter<T extends BaseViewListener, M extends BaseMo
     /**
      * @return getView是返回一个绑定好的view对象
      */
-    public T getView() {
+    public V getView() {
         if (weakReference != null) {
             return weakReference.get();
         }

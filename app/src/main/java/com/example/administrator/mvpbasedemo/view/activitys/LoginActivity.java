@@ -16,7 +16,7 @@ import com.example.administrator.mvpbasedemo.view.interfaces.LoginActivityViewLi
  * Created by ljp on 2018/9/6
  * <p>
  */
-public class LoginActivity extends BaseActivity<LoginActivtiyPresent> implements LoginActivityViewListener {
+public class LoginActivity extends BaseActivity<LoginActivityViewListener,LoginActivtiyPresent> implements LoginActivityViewListener {
 
     private TextView mTv;
     private Button mButton;
@@ -40,6 +40,11 @@ public class LoginActivity extends BaseActivity<LoginActivtiyPresent> implements
     @Override
     protected LoginActivtiyPresent createPresenter() {
         return new LoginActivtiyPresent();
+    }
+
+    @Override
+    protected LoginActivityViewListener getIView() {
+        return this;
     }
 
 
